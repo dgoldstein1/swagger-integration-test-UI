@@ -17,7 +17,7 @@ import CheckCircle from "@material-ui/icons/CheckCircle";
 import { styles } from "../styles/styles";
 import TestCard from "./TestCard";
 
-import { mapping } from "../tests/tests";
+import { mapping } from "../tests/mapping";
 
 import { JSONtoArray, swaggerToTestCardArray } from "../util/utils";
 
