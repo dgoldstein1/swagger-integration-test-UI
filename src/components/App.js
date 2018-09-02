@@ -3,21 +3,15 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import CheckCircle from "@material-ui/icons/CheckCircle";
 import { styles } from "../styles/styles";
 import TestCard from "./TestCard";
 
-import { mapping } from "../tests/mapping";
+import mapping from "../tests/mapping";
 
 import { JSONtoArray, swaggerToTestCardArray } from "../util/utils";
 
@@ -56,7 +50,6 @@ class App extends React.Component {
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
             <Typography
-              variant="display"
               variant="title"
               color="inherit"
               align="center"

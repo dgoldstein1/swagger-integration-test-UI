@@ -1,10 +1,12 @@
-// tests.js
+import testObjectgetexamplesserviceshelloPositiveTest from "./testObject-getexamplesserviceshello-PositiveTest.js"
 
-/**
- * a randomly generated test mapped to get/examples/services/hello
- * @param {json} hello request
- * @return {Promise.resolve} {success : true, data}
- **/
-let mapping = {};
 
-export { mapping };
+export default {
+  "get/examples/services/hello": {
+    "testObjectgetexamplesserviceshelloPositiveTest": {
+      name: "PositiveTest",
+      test : testObjectgetexamplesserviceshelloPositiveTest,
+      ID : "testObjectgetexamplesserviceshelloPositiveTest"
+    }
+  }
+};

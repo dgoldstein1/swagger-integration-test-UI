@@ -1,36 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import CardMedia from "@material-ui/core/CardMedia";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import ShareIcon from "@material-ui/icons/Share";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import PlayArrow from "@material-ui/icons/PlayArrow";
 import Replay from "@material-ui/icons/Replay";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import CheckCircleOutline from "@material-ui/icons/CheckCircleOutline";
-import Error from "@material-ui/icons/Error";
 import { styles } from "../styles/styles";
 import classnames from "classnames";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import StarIcon from "@material-ui/icons/Star";
 
 let getStatusAsString = tests => {
   for (let i in tests) {
@@ -77,7 +66,7 @@ class TestCard extends React.Component {
                   this.props.tests.forEach(test =>
                     this.props.runTest(
                       this.props.pathType + this.props.path,
-                      test.testId,
+                      test.ID,
                       test.test
                     )
                   )
@@ -91,7 +80,7 @@ class TestCard extends React.Component {
                     if (test.success === false)
                       this.props.runTest(
                         this.props.pathType + this.props.path,
-                        test.testId,
+                        test.ID,
                         test.test
                       );
                   })
@@ -119,7 +108,7 @@ class TestCard extends React.Component {
                         onClick={() =>
                           this.props.runTest(
                             this.props.pathType + this.props.path,
-                            test.testId,
+                            test.ID,
                             test.test
                           )
                         }

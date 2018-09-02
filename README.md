@@ -15,12 +15,11 @@ npm start
 
 ## Development
 
-
 ### Prerequisites
 
-You will need 
+You will need
 
-- [Node JS](https://nodejs.org/en/)
+* [Node JS](https://nodejs.org/en/)
 
 ### Installing
 

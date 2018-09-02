@@ -14,6 +14,42 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
-  "definitions": {}
+  "paths": {
+    "/examples/services/hello": {
+      "get": {
+        "summary": "HelloProxy says 'hello' in a form that is handled by the gateway proxy.",
+        "operationId": "HelloProxy",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufHelloResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hello_text",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Exemplar"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufHelloResponse": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "description": "Defines the response type for the `HelloProxy` method."
+    }
+  }
 }
