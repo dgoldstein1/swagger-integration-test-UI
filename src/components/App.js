@@ -8,7 +8,9 @@ import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import { styles } from "../styles/styles";
+import { styles, theme } from "../styles/styles";
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/core/styles';
 import TestCard from "./TestCard";
 
 import mapping from "../tests/mapping";
@@ -45,7 +47,7 @@ class App extends React.Component {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
@@ -88,7 +90,7 @@ class App extends React.Component {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" color="primary">
+                    <Button variant="contained" color="primary">
                       Run Failing Tests
                     </Button>
                   </Grid>
@@ -128,7 +130,7 @@ class App extends React.Component {
           </Typography>
         </footer>
         {/* End footer */}
-      </React.Fragment>
+      </MuiThemeProvider>
     );
   }
 }
@@ -137,4 +139,4 @@ App.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(App);
+export default withTheme(theme)(withStyles(styles)(App));;

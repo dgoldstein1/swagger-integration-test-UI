@@ -1,6 +1,24 @@
 // styles.js
 
+import { createMuiTheme } from '@material-ui/core/styles';
+
+// colors
 import red from "@material-ui/core/colors/red";
+import green from '@material-ui/core/colors/green';
+import yellow from '@material-ui/core/colors/yellow';
+
+// decipher theme
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+    secondary: green,
+  },
+  status: {
+    loading : yellow,
+    success : green,
+    failure : red,
+  },
+});
 
 const styles = theme => ({
   appBar: {
@@ -53,4 +71,4 @@ const styles = theme => ({
   }
 });
 
-export { styles };
+export { styles, theme };
