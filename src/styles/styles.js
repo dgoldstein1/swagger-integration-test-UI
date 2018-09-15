@@ -12,12 +12,7 @@ const theme = createMuiTheme({
   palette: {
     primary: green,
     secondary: green,
-  },
-  status: {
-    loading : yellow,
-    success : green,
-    failure : red,
-  },
+  }
 });
 
 const styles = theme => ({
@@ -66,8 +61,20 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6
   },
-  avatar: {
-    backgroundColor: red[500]
+  statusAvatarundefined : { // loading
+    backgroundColor: yellow[700],
+    height : "60px",
+    width : "60px"
+  },
+  statusAvatarfalse : { // test failed
+    backgroundColor: red[600],
+    height : "60px",
+    width : "60px"
+  },
+  statusAvatartrue : { // success!
+    backgroundColor: green[600],
+    height : "60px",
+    width : "60px"
   }
 });
 

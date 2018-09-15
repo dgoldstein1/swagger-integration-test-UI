@@ -147,4 +147,4 @@ App.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withTheme(theme)(withStyles(styles)(App));;
+export default withTheme(theme)(withStyles(styles)(App));
