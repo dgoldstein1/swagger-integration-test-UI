@@ -30,6 +30,14 @@ class App extends React.Component {
   }
 
   /**
+   * actions done before the app is loaded
+   * - set app name on tab to swagger definition name
+   **/
+  componentDidMount() {
+    document.title = swagger.info.title
+  }
+
+  /**
    * callback for running a specific test
    * @param {string} testPath. Path to the card (e.g. "get/examples/services/hello")
    * @param {string} testId specific id within the card "randomId1"
