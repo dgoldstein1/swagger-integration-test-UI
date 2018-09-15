@@ -61,21 +61,24 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6
   },
-  statusAvatarundefined : { // loading
+  statusAvatarloading : { // loading
     backgroundColor: yellow[700],
     height : "60px",
     width : "60px"
   },
-  statusAvatarfalse : { // test failed
+  statusAvatarfailure : { // test failed
     backgroundColor: red[600],
     height : "60px",
     width : "60px"
   },
-  statusAvatartrue : { // success!
+  statusAvatarsuccess : { // success!
     backgroundColor: green[600],
     height : "60px",
     width : "60px"
-  }
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
 });
 
 export { styles, theme };
