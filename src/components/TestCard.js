@@ -13,6 +13,7 @@ import PlayArrow from "@material-ui/icons/PlayArrow";
 import Replay from "@material-ui/icons/Replay";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/styles";
 import classnames from "classnames";
@@ -40,7 +41,7 @@ class TestCard extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Grid kitem sm={6} md={5}>
+      <Grid item md={4}>
         <Card className={classes.card}>
           <CardHeader
             avatar={
@@ -95,7 +96,7 @@ class TestCard extends React.Component {
               aria-expanded={this.state.expanded}
               aria-label="Show more"
             >
-              <ExpandMoreIcon />
+              {this.state.expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

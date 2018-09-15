@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "exemplar.proto",
+    "title": "spaceservice.proto",
     "version": "version not set"
   },
   "schemes": [
@@ -15,41 +15,419 @@
     "application/json"
   ],
   "paths": {
-    "/examples/services/hello": {
+    "/listSpaces": {
       "get": {
-        "summary": "HelloProxy says 'hello' in a form that is handled by the gateway proxy.",
-        "operationId": "HelloProxy",
+        "operationId": "ListWorkspaces",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/protobufHelloResponse"
+              "$ref": "#/definitions/protobufListWorkspacesResponse"
             }
           }
         },
         "parameters": [
           {
-            "name": "hello_text",
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "iHavePermission",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "Exemplar"
+          "Spaceservice"
+        ]
+      }
+    },
+    "/permission": {
+      "get": {
+        "operationId": "Permission",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufPermissionResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Spaceservice"
+        ]
+      }
+    },
+    "/spaces": {
+      "post": {
+        "operationId": "CreateWorkspace",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufWorkspace"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protobufWorkspace"
+            }
+          }
+        ],
+        "tags": [
+          "Spaceservice"
+        ]
+      }
+    },
+    "/spaces/{id}": {
+      "get": {
+        "operationId": "ReadWorkspace",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufWorkspace"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspace.ID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.version",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.acm",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.creator",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.permission.create.allow",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace.permission.read.allow",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace.permission.update.allow",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace.permission.delete.allow",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace.permission.share.allow",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace.created",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "workspace.modified",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "workspace.image",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workspace.discoverable",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Spaceservice"
+        ]
+      },
+      "delete": {
+        "operationId": "DeleteWorkspace",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufDeleteWorkspaceResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Spaceservice"
+        ]
+      },
+      "patch": {
+        "operationId": "UpdateWorkspace",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufWorkspace"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protobufWorkspace"
+            }
+          }
+        ],
+        "tags": [
+          "Spaceservice"
         ]
       }
     }
   },
   "definitions": {
-    "protobufHelloResponse": {
+    "protobufAllow": {
       "type": "object",
       "properties": {
-        "text": {
+        "allow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protobufDeleteWorkspaceResponse": {
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "string"
+        },
+        "workspace": {
+          "$ref": "#/definitions/protobufWorkspace"
+        }
+      }
+    },
+    "protobufListWorkspacesResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "spaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufUnclassifiedWorkspace"
+          }
+        }
+      }
+    },
+    "protobufPermission": {
+      "type": "object",
+      "properties": {
+        "create": {
+          "$ref": "#/definitions/protobufAllow"
+        },
+        "read": {
+          "$ref": "#/definitions/protobufAllow"
+        },
+        "update": {
+          "$ref": "#/definitions/protobufAllow"
+        },
+        "delete": {
+          "$ref": "#/definitions/protobufAllow"
+        },
+        "share": {
+          "$ref": "#/definitions/protobufAllow"
+        }
+      }
+    },
+    "protobufPermissionResponse": {
+      "type": "object",
+      "properties": {
+        "iHavePermission": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "protobufUnclassifiedWorkspace": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "numberOfMembers": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufWorkspace": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "acm": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "permission": {
+          "$ref": "#/definitions/protobufPermission"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "image": {
+          "type": "string"
+        },
+        "discoverable": {
           "type": "string"
         }
       },
-      "description": "Defines the response type for the `HelloProxy` method."
+      "title": "///////////////////\nWorkspace Proto //\n///////////////////"
     }
   }
 }

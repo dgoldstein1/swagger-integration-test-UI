@@ -98,7 +98,7 @@ class App extends React.Component {
           </div>
           <div className={classNames(classes.layout, classes.cardGrid)}>
             {/* End hero unit */}
-            <Grid container spacing={40}>
+            <Grid container justify="center" spacing={40}>
               {swaggerToTestCardArray(swagger).map((card, i) => (
                 <TestCard
                   key={i}
