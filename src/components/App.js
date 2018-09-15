@@ -9,8 +9,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { styles, theme } from "../styles/styles";
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import { withTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { withTheme } from "@material-ui/core/styles";
 import TestCard from "./TestCard";
 
 import mapping from "../tests/mapping";
@@ -34,7 +34,7 @@ class App extends React.Component {
    * - set app name on tab to swagger definition name
    **/
   componentDidMount() {
-    document.title = swagger.info.title
+    document.title = swagger.info.title;
   }
 
   /**
@@ -59,12 +59,7 @@ class App extends React.Component {
         <CssBaseline />
         <AppBar position="static" className={classes.appBar}>
           <Toolbar>
-            <Typography
-              variant="title"
-              color="inherit"
-              align="center"
-              noWrap
-            >
+            <Typography variant="title" color="inherit" align="center" noWrap>
               {`${swagger.info.title} Integration Test Suite : SUCCESS `}
             </Typography>
           </Toolbar>
