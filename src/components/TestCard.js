@@ -22,6 +22,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import PlayArrowWithSpinner from "./PlayArrowWithSpinner"
 
 let getStatusAsString = tests => {
   for (let i in tests) {
@@ -118,15 +119,13 @@ class TestCard extends React.Component {
                 {this.props.tests.map((test, i) => (
                   <ListItem key={i} button>
                     <ListItemIcon>
-                      <PlayArrow
-                        onClick={() =>
+                      <PlayArrowWithSpinner onClick={() =>
                           this.props.runTest(
                             this.props.pathType + this.props.path,
                             test.ID,
                             test.test
                           )
-                        }
-                      />
+                        }/>
                     </ListItemIcon>
                     <ListItemText inset primary={test.name} />
                   </ListItem>
