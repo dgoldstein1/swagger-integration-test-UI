@@ -20,8 +20,17 @@ const theme = createMuiTheme({
 });
 
 const styles = theme => ({
-  appBar: {
-    position: "relative"
+  appBarSuccess: {
+    position: "relative",
+    backgroundColor : SUCCESS_COLOR
+  },
+  appBarFailure: {
+    position: "relative",
+    backgroundColor : FAILURE_COLOR
+  },
+  appBarLoading : {
+    position: "relative",
+    backgroundColor : LOADING_COLOR
   },
   icon: {
     marginRight: theme.spacing.unit * 2

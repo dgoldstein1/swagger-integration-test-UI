@@ -28,6 +28,7 @@ class App extends React.Component {
     };
     this._runTest = this._runTest.bind(this);
     this._runAllTests = this._runAllTests.bind(this);
+    this._getHeaderClass = this._getHeaderClass.bind(this);
   }
 
   /**
@@ -83,16 +84,43 @@ class App extends React.Component {
     });
   };
 
+  /**
+   * gets header color from the state of all tests
+   * if any tests are undefined, is yellow
+   * then, if any tests are red, is red
+   * else is green
+   *
+   * @param {json} classes
+   * @return {string} className
+   **/
+  _getHeaderClass(classes) {
+    let someTestsHaveFailed = false
+    // loop through tests
+    for (let endpt in this.state.tests) {
+      for (let test in this.state.tests[endpt]) {
+        let t = this.state.tests[endpt][test]
+        // if any test is undefined, return loading
+        if (t.success === undefined)
+          return classes.appBarLoading
+        if (t.success === false)
+          someTestsHaveFailed = true
+      }
+    }
+    if (someTestsHaveFailed)
+      return classes.appBarFailure
+    return classes.appBarSuccess
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="static" className={this._getHeaderClass(classes)}>
           <Toolbar>
             <Typography variant="title" color="inherit" align="center" noWrap>
-              {`${swagger.info.title} Integration Test Suite : SUCCESS `}
+              {`${swagger.info.title} ${swagger.info.version} Integration Test Suite`}
             </Typography>
           </Toolbar>
         </AppBar>
