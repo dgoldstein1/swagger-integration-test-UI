@@ -8,11 +8,6 @@ import CheckIcon from "@material-ui/icons/Check";
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-// colors
-import red from "@material-ui/core/colors/red";
-import green from '@material-ui/core/colors/green';
-import yellow from '@material-ui/core/colors/yellow';
-
 import {styles} from "../styles/styles"
 
 /**
