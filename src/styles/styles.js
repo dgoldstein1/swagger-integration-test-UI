@@ -56,7 +56,6 @@ const styles = theme => ({
     flexDirection: "column"
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
   },
   cardContent: {
     flexGrow: 1
@@ -108,6 +107,20 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: FAILURE_COLOR,
     },
+  },
+  buttonFailureMain : {
+    backgroundColor: FAILURE_COLOR,
+    '&:hover': {
+      backgroundColor: FAILURE_COLOR,
+    },
+    height : "120px",  
+  },
+  buttonSuccessMain : {
+    backgroundColor: SUCCESS_COLOR,
+    '&:hover': {
+      backgroundColor: SUCCESS_COLOR,
+    },
+    height : "120px",  
   },
   fabProgress: {
     color: LOADING_COLOR,

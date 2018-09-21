@@ -30,7 +30,6 @@ class App extends React.Component {
     this._runAllTests = this._runAllTests.bind(this);
   }
 
-
   /**
    * runs all tests in the mapping file
    * @param {bool} run only failing tests?
@@ -49,8 +48,6 @@ class App extends React.Component {
     }
   }
 
-
-
   /**
    * actions done before the app is loaded
    * - set app name on tab to swagger definition name
@@ -59,7 +56,7 @@ class App extends React.Component {
   componentDidMount() {
     document.title = swagger.info.title;
     // run all tests
-    this._runAllTests()
+    // this._runAllTests()
   }
 
   /**
