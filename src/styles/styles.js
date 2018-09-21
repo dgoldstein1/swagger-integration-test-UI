@@ -97,8 +97,17 @@ const styles = theme => ({
       backgroundColor: SUCCESS_COLOR,
     },
   },
-  playArrowWithSpinner : {
-    backgroundColor : LOADING_COLOR,
+  buttonLoading: {
+    backgroundColor: LOADING_COLOR,
+    '&:hover': {
+      backgroundColor: LOADING_COLOR,
+    },
+  },
+  buttonFailure: {
+    backgroundColor: FAILURE_COLOR,
+    '&:hover': {
+      backgroundColor: FAILURE_COLOR,
+    },
   },
   fabProgress: {
     color: LOADING_COLOR,

@@ -21,7 +21,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import PlayArrowWithSpinner from "./PlayArrowWithSpinner"
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -59,7 +58,6 @@ class TestCard extends React.Component {
           />
           {status === "loading" && (
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <CircularProgress className={classes.progress} size={50} />
             </div>
           )}
           {status === "failure" && <div>FAILURE</div>}
@@ -78,24 +76,26 @@ class TestCard extends React.Component {
           </CardContent>
           <CardActions>
             <IconButton aria-label="Run tests">
-              <PlayArrow
-                onClick={() =>
-                  this.props.tests.forEach(test =>
-                    this.props.runTest(
-                      this.props.pathType + this.props.path,
-                      test.ID,
-                      test.test
+              <Tooltip title="Run All" placement="top">
+                <PlayArrow
+                  onClick={() =>
+                    this.props.tests.forEach(test =>
+                      this.props.runTest(
+                        this.props.pathType + this.props.path,
+                        test.ID,
+                        test.test
+                      )
                     )
-                  )
-                }
-              />
+                  }
+                />
+              </Tooltip>
             </IconButton>
             <IconButton aria-label="Run failed tests">
               <Tooltip title="Run failing" placement="top">
                 <Replay
                   onClick={() =>
                     this.props.tests.forEach(test => {
-                      if (test.success === false)
+                      if (!test.success)
                         this.props.runTest(
                           this.props.pathType + this.props.path,
                           test.ID,
@@ -121,17 +121,15 @@ class TestCard extends React.Component {
             <CardContent>
               <List component="nav">
                 {this.props.tests.map((test, i) => (
-                  <ListItem key={i} button>
+                  <ListItem key={i} onClick={() => {
+                    this.props.runTest(
+                      this.props.pathType + this.props.path,
+                      test.ID,
+                      test.test
+                    )
+                  }} button>
                     <ListItemIcon>
-                      <PlayArrowWithSpinner onClick={() =>
-                          this.props.runTest(
-                            this.props.pathType + this.props.path,
-                            test.ID,
-                            test.test
-                          )
-                        }
-                        classes={this.props.classes}
-                        />
+                      <PlayArrowWithSpinner classes={this.props.classes} success={test.success}/>
                     </ListItemIcon>
                     <ListItemText inset primary={test.name} />
                   </ListItem>
