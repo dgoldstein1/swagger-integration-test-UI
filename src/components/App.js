@@ -180,7 +180,7 @@ class App extends React.Component {
         {/* Footer */}
         <footer className={classes.footer}>
           <Typography variant="title" align="center" gutterBottom>
-            Copyright © 2018 Decipher Technology Studios
+            Copyright © 2018 <a style={{"textDecoration" : "none", "color" : "black"}} href="http://deciphernow.com/"> Decipher Technology Studios </a>
           </Typography>
           <Typography
             variant="subheading"
@@ -188,8 +188,9 @@ class App extends React.Component {
             color="textSecondary"
             component="p"
           >
-            Source Code
-            https://github.com/dgoldstein1/integration-test-generator
+            <a style={{"textDecoration" : "none", "color" : "black"}} href="https://github.com/dgoldstein1/integration-test-generator">
+              https://github.com/dgoldstein1/integration-test-generator
+            </a>
           </Typography>
         </footer>
         {/* End footer */}
