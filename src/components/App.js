@@ -27,14 +27,39 @@ class App extends React.Component {
       loading: false
     };
     this._runTest = this._runTest.bind(this);
+    this._runAllTests = this._runAllTests.bind(this);
   }
+
+
+  /**
+   * runs all tests in the mapping file
+   * @param {bool} run only failing tests?
+   **/
+  _runAllTests = (failingOnly=false) => {
+    for (let path in this.state.tests) {
+      for (let test in this.state.tests[path]) {
+        // declare temp json test object
+        let t = this.state.tests[path][test]
+        // do not run if failing only and is success
+        if (failingOnly && t.success === true)
+          continue
+        // else run test
+        this._runTest(path, t.ID, t.test)
+      }
+    }
+  }
+
+
 
   /**
    * actions done before the app is loaded
    * - set app name on tab to swagger definition name
+   * - run all tests
    **/
   componentDidMount() {
     document.title = swagger.info.title;
+    // run all tests
+    this._runAllTests()
   }
 
   /**
@@ -88,12 +113,12 @@ class App extends React.Component {
               <div className={classes.heroButtons}>
                 <Grid container spacing={16} justify="center">
                   <Grid item>
-                    <Button variant="contained" color="primary">
+                    <Button variant="outlined" onClick={() => this._runAllTests()}>
                       Run All Tests
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" color="primary">
+                    <Button variant="outlined" onClick={() => this._runAllTests(true)}>
                       Run Failing Tests
                     </Button>
                   </Grid>
