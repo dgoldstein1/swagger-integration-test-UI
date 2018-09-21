@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "spaceservice.proto",
+    "title": "folderservice.proto",
     "version": "version not set"
   },
   "schemes": [
@@ -15,20 +15,148 @@
     "application/json"
   ],
   "paths": {
-    "/listSpaces": {
-      "get": {
-        "operationId": "ListWorkspaces",
+    "/deleteAll": {
+      "delete": {
+        "operationId": "DeleteAll",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/protobufListWorkspacesResponse"
+              "$ref": "#/definitions/protobufUpdatefolderResponse"
+            }
+          }
+        },
+        "tags": [
+          "Folderservice"
+        ]
+      }
+    },
+    "/folders": {
+      "get": {
+        "operationId": "ReadFolder",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufReadFolderResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Folderservice"
+        ]
+      },
+      "delete": {
+        "operationId": "DeleteFolder",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufUpdatefolderResponse"
+            }
+          }
+        },
+        "tags": [
+          "Folderservice"
+        ]
+      },
+      "post": {
+        "operationId": "CreateFolder",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufItem"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protobufCreateFolderRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Folderservice"
+        ]
+      },
+      "patch": {
+        "operationId": "UpdateFolder",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufUpdatefolderResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protobufUpdateFolderRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Folderservice"
+        ]
+      }
+    },
+    "/search": {
+      "get": {
+        "operationId": "Search",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protobufSearchResponse"
             }
           }
         },
         "parameters": [
           {
             "name": "q",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "types",
             "in": "query",
             "required": false,
             "type": "string"
@@ -48,25 +176,31 @@
             "format": "int64"
           },
           {
-            "name": "iHavePermission",
+            "name": "parent",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "space",
             "in": "query",
             "required": false,
             "type": "string"
           }
         ],
         "tags": [
-          "Spaceservice"
+          "Folderservice"
         ]
       }
     },
-    "/permission": {
+    "/types": {
       "get": {
-        "operationId": "Permission",
+        "operationId": "ListItemTypes",
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/protobufPermissionResponse"
+              "$ref": "#/definitions/protobufListItemTypesResponse"
             }
           }
         },
@@ -78,317 +212,84 @@
             "type": "string"
           },
           {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Spaceservice"
-        ]
-      }
-    },
-    "/spaces": {
-      "post": {
-        "operationId": "CreateWorkspace",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/protobufWorkspace"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/protobufWorkspace"
-            }
-          }
-        ],
-        "tags": [
-          "Spaceservice"
-        ]
-      }
-    },
-    "/spaces/{id}": {
-      "get": {
-        "operationId": "ReadWorkspace",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/protobufWorkspace"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace.ID",
+            "name": "item.ID",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "workspace.version",
+            "name": "item.version",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "workspace.name",
+            "name": "item.name",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "workspace.description",
+            "name": "item.parent",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "workspace.acm",
+            "name": "item.space",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "workspace.creator",
+            "name": "item.type",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "NONE",
+              "FOLDER",
+              "ODRIVE"
+            ],
+            "default": "NONE"
           },
           {
-            "name": "workspace.permission.create.allow",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "workspace.permission.read.allow",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "workspace.permission.update.allow",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "workspace.permission.delete.allow",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "workspace.permission.share.allow",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "workspace.created",
+            "name": "item.created",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
-            "name": "workspace.modified",
+            "name": "item.modified",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
-          },
-          {
-            "name": "workspace.image",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "workspace.discoverable",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
-          "Spaceservice"
-        ]
-      },
-      "delete": {
-        "operationId": "DeleteWorkspace",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/protobufDeleteWorkspaceResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Spaceservice"
-        ]
-      },
-      "patch": {
-        "operationId": "UpdateWorkspace",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/protobufWorkspace"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/protobufWorkspace"
-            }
-          }
-        ],
-        "tags": [
-          "Spaceservice"
+          "Folderservice"
         ]
       }
     }
   },
   "definitions": {
-    "protobufAllow": {
+    "protobufCreateFolderRequestBody": {
       "type": "object",
       "properties": {
-        "allow": {
+        "folder": {
+          "$ref": "#/definitions/protobufItem"
+        },
+        "children": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/protobufItem"
           }
         }
       }
     },
-    "protobufDeleteWorkspaceResponse": {
-      "type": "object",
-      "properties": {
-        "deleted": {
-          "type": "string"
-        },
-        "workspace": {
-          "$ref": "#/definitions/protobufWorkspace"
-        }
-      }
-    },
-    "protobufListWorkspacesResponse": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "string",
-          "format": "int64"
-        },
-        "spaces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufUnclassifiedWorkspace"
-          }
-        }
-      }
-    },
-    "protobufPermission": {
-      "type": "object",
-      "properties": {
-        "create": {
-          "$ref": "#/definitions/protobufAllow"
-        },
-        "read": {
-          "$ref": "#/definitions/protobufAllow"
-        },
-        "update": {
-          "$ref": "#/definitions/protobufAllow"
-        },
-        "delete": {
-          "$ref": "#/definitions/protobufAllow"
-        },
-        "share": {
-          "$ref": "#/definitions/protobufAllow"
-        }
-      }
-    },
-    "protobufPermissionResponse": {
-      "type": "object",
-      "properties": {
-        "iHavePermission": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
-    "protobufUnclassifiedWorkspace": {
-      "type": "object",
-      "properties": {
-        "ID": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "creator": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "numberOfMembers": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "protobufWorkspace": {
+    "protobufItem": {
       "type": "object",
       "properties": {
         "ID": {
@@ -400,17 +301,14 @@
         "name": {
           "type": "string"
         },
-        "description": {
+        "parent": {
           "type": "string"
         },
-        "acm": {
+        "space": {
           "type": "string"
         },
-        "creator": {
-          "type": "string"
-        },
-        "permission": {
-          "$ref": "#/definitions/protobufPermission"
+        "type": {
+          "$ref": "#/definitions/protobufItemType"
         },
         "created": {
           "type": "string",
@@ -419,15 +317,115 @@
         "modified": {
           "type": "string",
           "format": "int64"
-        },
-        "image": {
-          "type": "string"
-        },
-        "discoverable": {
-          "type": "string"
         }
-      },
-      "title": "///////////////////\nWorkspace Proto //\n///////////////////"
+      }
+    },
+    "protobufItemType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "FOLDER",
+        "ODRIVE"
+      ],
+      "default": "NONE"
+    },
+    "protobufListItemTypesResponse": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protobufReadFolderResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "folder": {
+          "$ref": "#/definitions/protobufItem"
+        },
+        "breadcrumbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufItem"
+          }
+        }
+      }
+    },
+    "protobufSearchResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufItem"
+          }
+        }
+      }
+    },
+    "protobufUpdateFolderRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "childrenToAdd": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufItem"
+          }
+        },
+        "childrenToDelete": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufItem"
+          }
+        }
+      }
+    },
+    "protobufUpdatefolderResponse": {
+      "type": "object",
+      "properties": {
+        "folder": {
+          "$ref": "#/definitions/protobufItem"
+        },
+        "deleted": {
+          "type": "string",
+          "format": "int64"
+        },
+        "added": {
+          "type": "string",
+          "format": "int64"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }

@@ -33,7 +33,7 @@ let getStatusAsString = tests => {
 };
 
 class TestCard extends React.Component {
-  state = { expanded: false };
+  state = { expanded: true };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -125,7 +125,9 @@ class TestCard extends React.Component {
                             test.ID,
                             test.test
                           )
-                        }/>
+                        }
+                        classes={this.props.classes}
+                        />
                     </ListItemIcon>
                     <ListItemText inset primary={test.name} />
                   </ListItem>
