@@ -29,7 +29,7 @@ let CardMediaWithIcon = (classes, status) => {
           <Button
             className={classes.buttonSuccessMain}
             size={"large"}
-            fullWidth={"true"}
+            fullWidth={true}
           >
             <CheckIcon/>
           </Button>
@@ -40,7 +40,7 @@ let CardMediaWithIcon = (classes, status) => {
           <Button
             className={classes.buttonFailureMain}
             size={"large"}
-            fullWidth={"true"}
+            fullWidth={true}
             disableRipple={true}
           >
             <WarningIcon/>

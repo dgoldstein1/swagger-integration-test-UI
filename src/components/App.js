@@ -75,7 +75,6 @@ class App extends React.Component {
     })
     // run test
     testFunction().then(res => {
-      this.state.tests[`${testPath}`][`${testName}`]["success"] = res.success;
       // set updated state of test
       this.setState(currState => {
         currState.tests[`${testPath}`][`${testName}`]["success"] = res.success;
