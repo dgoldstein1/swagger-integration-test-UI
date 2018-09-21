@@ -56,7 +56,7 @@ class App extends React.Component {
   componentDidMount() {
     document.title = swagger.info.title;
     // run all tests
-    // this._runAllTests()
+    this._runAllTests()
   }
 
   /**
@@ -67,9 +67,19 @@ class App extends React.Component {
    * sets state of test using set state
    **/
   _runTest = (testPath, testName, testFunction) => {
+    // set test as loading
+    this.setState(currState => {
+      currState.tests[`${testPath}`][`${testName}`]["success"] = undefined;
+      return {currState}
+    })
+    // run test
     testFunction().then(res => {
       this.state.tests[`${testPath}`][`${testName}`]["success"] = res.success;
-      this.setState({});
+      // set updated state of test
+      this.setState(currState => {
+        currState.tests[`${testPath}`][`${testName}`]["success"] = res.success;
+        return {currState}
+      })
     });
   };
 
