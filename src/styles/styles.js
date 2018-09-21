@@ -7,6 +7,10 @@ import red from "@material-ui/core/colors/red";
 import green from '@material-ui/core/colors/green';
 import yellow from '@material-ui/core/colors/yellow';
 
+const LOADING_COLOR = yellow[800];
+const SUCCESS_COLOR = green[500]
+const FAILURE_COLOR = red[500]
+
 // decipher theme
 const theme = createMuiTheme({
   palette: {
@@ -62,17 +66,17 @@ const styles = theme => ({
     padding: theme.spacing.unit * 6
   },
   statusAvatarloading : { // loading
-    backgroundColor: yellow[700],
+    backgroundColor: LOADING_COLOR,
     height : "60px",
     width : "60px"
   },
   statusAvatarfailure : { // test failed
-    backgroundColor: red[600],
+    backgroundColor: FAILURE_COLOR,
     height : "60px",
     width : "60px"
   },
   statusAvatarsuccess : { // success!
-    backgroundColor: green[600],
+    backgroundColor: SUCCESS_COLOR,
     height : "60px",
     width : "60px"
   },
@@ -88,20 +92,23 @@ const styles = theme => ({
     position: 'relative',
   },
   buttonSuccess: {
-    backgroundColor: green[500],
+    backgroundColor: SUCCESS_COLOR,
     '&:hover': {
-      backgroundColor: green[700],
+      backgroundColor: SUCCESS_COLOR,
     },
   },
+  playArrowWithSpinner : {
+    backgroundColor : LOADING_COLOR,
+  },
   fabProgress: {
-    color: green[500],
+    color: LOADING_COLOR,
     position: 'absolute',
     top: -6,
     left: -6,
     zIndex: 1,
   },
   buttonProgress: {
-    color: green[500],
+    color: LOADING_COLOR,
     position: 'absolute',
     top: '50%',
     left: '50%',

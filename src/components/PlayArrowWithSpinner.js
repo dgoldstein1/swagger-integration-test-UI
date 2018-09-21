@@ -8,7 +8,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import {styles} from "../styles/styles"
+import {styles } from "../styles/styles"
 
 /**
  * Play arrow material-ui icon with loading spinner
@@ -30,8 +30,9 @@ class PlayArrowWithSpinner extends React.Component {
             variant="fab"
             color="primary"
             onClick={this.props.onClick}
+            className={classes.playArrowWithSpinner}
           >
-            {success ? <CheckIcon /> : <PlayArrow />}
+            {success ? <CheckIcon /> : <PlayArrow className={classes.playArrowWithSpinner} />}
           </Button>
           {loading && <CircularProgress size={68} className={classes.fabProgress} />}
         </div>

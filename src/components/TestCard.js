@@ -23,6 +23,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PlayArrowWithSpinner from "./PlayArrowWithSpinner"
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 let getStatusAsString = tests => {
   for (let i in tests) {
@@ -45,7 +47,7 @@ class TestCard extends React.Component {
     let status = getStatusAsString(this.props.tests);
 
     return (
-      <Grid item md={4}>
+      <Grid item md={3}>
         <Card className={classes.card}>
           <CardHeader
             avatar={
@@ -89,18 +91,20 @@ class TestCard extends React.Component {
               />
             </IconButton>
             <IconButton aria-label="Run failed tests">
-              <Replay
-                onClick={() =>
-                  this.props.tests.forEach(test => {
-                    if (test.success === false)
-                      this.props.runTest(
-                        this.props.pathType + this.props.path,
-                        test.ID,
-                        test.test
-                      );
-                  })
-                }
-              />
+              <Tooltip title="Run failing" placement="top">
+                <Replay
+                  onClick={() =>
+                    this.props.tests.forEach(test => {
+                      if (test.success === false)
+                        this.props.runTest(
+                          this.props.pathType + this.props.path,
+                          test.ID,
+                          test.test
+                        );
+                    })
+                  }
+                />
+              </Tooltip>
             </IconButton>
             <IconButton
               className={classnames(classes.expand, {
