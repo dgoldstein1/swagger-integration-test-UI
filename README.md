@@ -4,6 +4,7 @@ User interface for displaying swagger integration tests running.
 
 ## Planned Features
 
+- add tests and ci pipeline
 - multiple types of tests
 - running from CLI
 - exporting to sdk
