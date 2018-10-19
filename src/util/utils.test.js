@@ -3,6 +3,50 @@
 import * as utils from "./utils";
 
 describe("utils", () => {
+  describe("getHeaderClass", () => {
+    it("shows red if some tests have failed", () => {
+      let classes = {
+        appBarSuccess: "App-appBarSuccess-1",
+        appBarFailure: "App-appBarFailure-2",
+        appBarLoading: "App-appBarLoading-3",
+        icon: "App-icon-4",
+        heroUnit: "App-heroUnit-5",
+        heroContent: "App-heroContent-6",
+        heroButtons: "App-heroButtons-7",
+        layout: "App-layout-8",
+        cardGrid: "App-cardGrid-9",
+        card: "App-card-10",
+        cardMedia: "App-cardMedia-11",
+        cardContent: "App-cardContent-12",
+        footer: "App-footer-13",
+        statusAvatarloading: "App-statusAvatarloading-14",
+        statusAvatarfailure: "App-statusAvatarfailure-15",
+        statusAvatarsuccess: "App-statusAvatarsuccess-16",
+        progress: "App-progress-17",
+        root: "App-root-18",
+        wrapper: "App-wrapper-19",
+        buttonSuccess: "App-buttonSuccess-20",
+        buttonLoading: "App-buttonLoading-21",
+        buttonFailure: "App-buttonFailure-22",
+        buttonFailureMain: "App-buttonFailureMain-23",
+        buttonSuccessMain: "App-buttonSuccessMain-24",
+        fabProgress: "App-fabProgress-25",
+        buttonProgress: "App-buttonProgress-26"
+      };
+      let tests = {
+        "get/example": {
+          getExamplePositiveTest: {
+            name: "PositiveTest",
+            ID: "getExamplePositiveTest",
+            success: false
+          }
+        }
+      };
+      expect(utils.getHeaderClass(classes, tests)).toEqual(
+        classes.appBarFailure
+      );
+    });
+  });
   describe("swaggerToTestCardArray", () => {
     it("converts a swagger file to valid array", () => {
       let swagger = {
