@@ -4,20 +4,11 @@ User interface for displaying swagger integration tests running.
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3464f1efa62bc883fb45/test_coverage)](https://codeclimate.com/github/dgoldstein1/swagger-integration-test-UI/test_coverage)
 
+![app](public/exampleApp.png)
 
 ## Planned Features
 
-- add tests and ci pipeline
-- multiple types of tests
-- running from CLI
-- exporting to sdk
-
-## Usage
-
-```sh
-npm install
-npm start
-```
+- running tests with CLI
 
 ## Development
 
@@ -29,7 +20,12 @@ You will need
 
 ### Installing
 
-TODO
+```sh
+git clone git@github.com:dgoldstein1/swagger-integration-test-UI.git
+cd swagger-integration-test-UI
+npm install
+npm start
+```
 
 ## Authors
 
