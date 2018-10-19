@@ -32,16 +32,9 @@ let post = function(url, body = {}) {
 };
 
 let del = function(url, body = {}) {
-  return fetch(url, {
-    body: JSON.stringify(body),
-    credentials: "include",
-    method: "delete",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(res => res.json())
-    .then(res => ({ url: url, success: true, data: res }))
+  return axios
+    .delete(url, body, headers)
+    .then(res => ({ url: url, success: true, data: res.data }))
     .catch(error => ({ url: url, success: false, error: error }));
 };
 

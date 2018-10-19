@@ -1,36 +1,36 @@
 // styles.js
 
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles";
 
 // colors
 import red from "@material-ui/core/colors/red";
-import green from '@material-ui/core/colors/green';
-import yellow from '@material-ui/core/colors/yellow';
+import green from "@material-ui/core/colors/green";
+import yellow from "@material-ui/core/colors/yellow";
 
 const LOADING_COLOR = yellow[800];
-const SUCCESS_COLOR = green[500]
-const FAILURE_COLOR = red[500]
+const SUCCESS_COLOR = green[500];
+const FAILURE_COLOR = red[500];
 
 // decipher theme
 const theme = createMuiTheme({
   palette: {
     primary: green,
-    secondary: green,
+    secondary: green
   }
 });
 
 const styles = theme => ({
   appBarSuccess: {
     position: "relative",
-    backgroundColor : SUCCESS_COLOR
+    backgroundColor: SUCCESS_COLOR
   },
   appBarFailure: {
     position: "relative",
-    backgroundColor : FAILURE_COLOR
+    backgroundColor: FAILURE_COLOR
   },
-  appBarLoading : {
+  appBarLoading: {
     position: "relative",
-    backgroundColor : LOADING_COLOR
+    backgroundColor: LOADING_COLOR
   },
   icon: {
     marginRight: theme.spacing.unit * 2
@@ -64,8 +64,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column"
   },
-  cardMedia: {
-  },
+  cardMedia: {},
   cardContent: {
     flexGrow: 1
   },
@@ -73,80 +72,82 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit * 6
   },
-  statusAvatarloading : { // loading
+  statusAvatarloading: {
+    // loading
     backgroundColor: LOADING_COLOR,
-    height : "60px",
-    width : "60px"
+    height: "60px",
+    width: "60px"
   },
-  statusAvatarfailure : { // test failed
+  statusAvatarfailure: {
+    // test failed
     backgroundColor: FAILURE_COLOR,
-    height : "60px",
-    width : "60px"
+    height: "60px",
+    width: "60px"
   },
-  statusAvatarsuccess : { // success!
+  statusAvatarsuccess: {
+    // success!
     backgroundColor: SUCCESS_COLOR,
-    height : "60px",
-    width : "60px"
+    height: "60px",
+    width: "60px"
   },
   progress: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing.unit * 2
   },
   root: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center"
   },
   wrapper: {
     margin: theme.spacing.unit,
-    position: 'relative',
+    position: "relative"
   },
   buttonSuccess: {
     backgroundColor: SUCCESS_COLOR,
-    '&:hover': {
-      backgroundColor: SUCCESS_COLOR,
-    },
+    "&:hover": {
+      backgroundColor: SUCCESS_COLOR
+    }
   },
   buttonLoading: {
     backgroundColor: LOADING_COLOR,
-    '&:hover': {
-      backgroundColor: LOADING_COLOR,
-    },
+    "&:hover": {
+      backgroundColor: LOADING_COLOR
+    }
   },
   buttonFailure: {
     backgroundColor: FAILURE_COLOR,
-    '&:hover': {
-      backgroundColor: FAILURE_COLOR,
-    },
+    "&:hover": {
+      backgroundColor: FAILURE_COLOR
+    }
   },
-  buttonFailureMain : {
+  buttonFailureMain: {
     backgroundColor: FAILURE_COLOR,
-    '&:hover': {
-      backgroundColor: FAILURE_COLOR,
+    "&:hover": {
+      backgroundColor: FAILURE_COLOR
     },
-    height : "120px",  
+    height: "120px"
   },
-  buttonSuccessMain : {
+  buttonSuccessMain: {
     backgroundColor: SUCCESS_COLOR,
-    '&:hover': {
-      backgroundColor: SUCCESS_COLOR,
+    "&:hover": {
+      backgroundColor: SUCCESS_COLOR
     },
-    height : "120px",  
+    height: "120px"
   },
   fabProgress: {
     color: LOADING_COLOR,
-    position: 'absolute',
+    position: "absolute",
     top: -6,
     left: -6,
-    zIndex: 1,
+    zIndex: 1
   },
   buttonProgress: {
     color: LOADING_COLOR,
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
     marginTop: -12,
-    marginLeft: -12,
-  },
+    marginLeft: -12
+  }
 });
-
 
 export { styles, theme };

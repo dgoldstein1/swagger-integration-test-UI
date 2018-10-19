@@ -20,10 +20,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import PlayArrowWithSpinner from "./PlayArrowWithSpinner"
-import Tooltip from '@material-ui/core/Tooltip';
-import cardMediaWithIcon from "./CardMediaWithIcon"
-
+import PlayArrowWithSpinner from "./PlayArrowWithSpinner";
+import Tooltip from "@material-ui/core/Tooltip";
+import cardMediaWithIcon from "./CardMediaWithIcon";
 
 let getStatusAsString = tests => {
   for (let i in tests) {
@@ -34,7 +33,7 @@ let getStatusAsString = tests => {
 };
 
 class TestCard extends React.Component {
-  state = { expanded: false };
+  state = { expanded: this.props.initiallyExpanded || false };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -110,15 +109,22 @@ class TestCard extends React.Component {
             <CardContent>
               <List component="nav">
                 {this.props.tests.map((test, i) => (
-                  <ListItem key={i} onClick={() => {
-                    this.props.runTest(
-                      this.props.pathType + this.props.path,
-                      test.ID,
-                      test.test
-                    )
-                  }} button>
+                  <ListItem
+                    key={i}
+                    onClick={() => {
+                      this.props.runTest(
+                        this.props.pathType + this.props.path,
+                        test.ID,
+                        test.test
+                      );
+                    }}
+                    button
+                  >
                     <ListItemIcon>
-                      <PlayArrowWithSpinner classes={this.props.classes} success={test.success}/>
+                      <PlayArrowWithSpinner
+                        classes={this.props.classes}
+                        success={test.success}
+                      />
                     </ListItemIcon>
                     <ListItemText inset primary={test.name} />
                   </ListItem>
@@ -138,7 +144,8 @@ TestCard.propTypes = {
   pathType: PropTypes.string.isRequired, // e.g. "get"
   data: PropTypes.object.isRequired, // e.g. {"summary":"HelloProxy says 'hello' in a form that is handled by the gateway proxy.","operationId":"HelloProxy","responses":{"200":{"description":"","schema":{"$ref":"#/definitions/protobufHelloResponse"}}},"parameters":[{"name":"hello_text","in":"query","required":false,"type":"string"}],"tags":["Exemplar"]}
   tests: PropTypes.array.isRequired, // [{name : accepts HelloProxy Request, success : true, test : () => {}}]
-  runTest: PropTypes.func.isRequired // callback for running the test
+  runTest: PropTypes.func.isRequired, // callback for running the test
+  initiallyExpanded: PropTypes.bool // open by default
 };
 
 export default withStyles(styles)(TestCard);
