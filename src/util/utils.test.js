@@ -64,7 +64,9 @@ describe("utils", () => {
               responses: {
                 "200": {
                   description: "",
-                  schema: { $ref: "#/definitions/protobufHelloResponse" }
+                  schema: {
+                    $ref: "#/definitions/protobufHelloResponse"
+                  }
                 }
               },
               parameters: [
@@ -103,7 +105,12 @@ describe("utils", () => {
           }
         },
         parameters: [
-          { name: "hello_text", in: "query", required: false, type: "string" }
+          {
+            name: "hello_text",
+            in: "query",
+            required: false,
+            type: "string"
+          }
         ],
         tags: ["Exemplar"]
       });
@@ -113,11 +120,19 @@ describe("utils", () => {
     it("converts json to array", () => {
       let data = {
         "get/examples/services/hello": {
-          randomId1: { name: "returns 200 response", test: "randomId1" }
+          randomId1: {
+            name: "returns 200 response",
+            test: "randomId1"
+          }
         }
       };
       expect(utils.JSONtoArray(data)).toEqual([
-        { randomId1: { name: "returns 200 response", test: "randomId1" } }
+        {
+          randomId1: {
+            name: "returns 200 response",
+            test: "randomId1"
+          }
+        }
       ]);
     });
   });
