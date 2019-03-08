@@ -11,31 +11,31 @@ require("whatwg-fetch");
 let headers = { "Content-Type": "application/json" };
 
 let get = function(url) {
-  return axios
-    .get(url, headers)
-    .then(res => ({ url: url, success: true, data: res.data }))
-    .catch(error => ({ url: url, success: false, error: error }));
+    return axios
+        .get(url, headers)
+        .then(res => ({ url: url, success: true, data: res.data }))
+        .catch(error => ({ url: url, success: false, error: error }));
 };
 
 let patch = function(url, body = {}) {
-  return axios
-    .patch(url, body, headers)
-    .then(res => ({ url: url, success: true, data: res.data }))
-    .catch(error => ({ url: url, success: false, error: error }));
+    return axios
+        .patch(url, body, headers)
+        .then(res => ({ url: url, success: true, data: res.data }))
+        .catch(error => ({ url: url, success: false, error: error }));
 };
 
 let post = function(url, body = {}) {
-  return axios
-    .post(url, body, headers)
-    .then(res => ({ url: url, success: true, data: res.data }))
-    .catch(error => ({ url: url, success: false, error: error }));
+    return axios
+        .post(url, body, headers)
+        .then(res => ({ url: url, success: true, data: res.data }))
+        .catch(error => ({ url: url, success: false, error: error }));
 };
 
 let del = function(url, body = {}) {
-  return axios
-    .delete(url, body, headers)
-    .then(res => ({ url: url, success: true, data: res.data }))
-    .catch(error => ({ url: url, success: false, error: error }));
+    return axios
+        .delete(url, body, headers)
+        .then(res => ({ url: url, success: true, data: res.data }))
+        .catch(error => ({ url: url, success: false, error: error }));
 };
 
 /////////////////
@@ -48,21 +48,21 @@ let del = function(url, body = {}) {
  * @return {string} params as url query (i.e. ?pagenumber=1)
  **/
 const paramsToUri = function(params) {
-  let uri = "";
+    let uri = "";
 
-  for (let param in params) {
-    uri += `&${param}=${params[param]}`;
-  }
-  // if we've added things, we need to put a question mark on the beginning
-  if (uri.length > 0) uri = "?" + uri.substr(1, uri.length);
+    for (let param in params) {
+        uri += `&${param}=${params[param]}`;
+    }
+    // if we've added things, we need to put a question mark on the beginning
+    if (uri.length > 0) uri = "?" + uri.substr(1, uri.length);
 
-  return uri;
+    return uri;
 };
 
 module.exports = {
-  get,
-  patch,
-  post,
-  del,
-  paramsToUri
+    get,
+    patch,
+    post,
+    del,
+    paramsToUri
 };

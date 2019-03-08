@@ -11,17 +11,17 @@
  * 
  **/
 let swaggerToTestCardArray = swagger => {
-  let toReturn = [];
-  for (let path in swagger.paths) {
-    for (let pathType in swagger.paths[path]) {
-      toReturn.push({
-        path,
-        pathType,
-        data: swagger.paths[path][pathType]
-      });
+    let toReturn = [];
+    for (let path in swagger.paths) {
+        for (let pathType in swagger.paths[path]) {
+            toReturn.push({
+                path,
+                pathType,
+                data: swagger.paths[path][pathType]
+            });
+        }
     }
-  }
-  return toReturn;
+    return toReturn;
 };
 
 /**
@@ -35,18 +35,18 @@ let swaggerToTestCardArray = swagger => {
  * @return {string} className
  **/
 let getHeaderClass = (classes, tests) => {
-  let someTestsHaveFailed = false;
-  // loop through tests
-  for (let endpt in tests) {
-    for (let test in tests[endpt]) {
-      let t = tests[endpt][test];
-      // if any test is undefined, return loading
-      if (t.success === undefined) return classes.appBarLoading;
-      if (t.success === false) someTestsHaveFailed = true;
+    let someTestsHaveFailed = false;
+    // loop through tests
+    for (let endpt in tests) {
+        for (let test in tests[endpt]) {
+            let t = tests[endpt][test];
+            // if any test is undefined, return loading
+            if (t.success === undefined) return classes.appBarLoading;
+            if (t.success === false) someTestsHaveFailed = true;
+        }
     }
-  }
-  if (someTestsHaveFailed) return classes.appBarFailure;
-  return classes.appBarSuccess;
+    if (someTestsHaveFailed) return classes.appBarFailure;
+    return classes.appBarSuccess;
 };
 
 /**
@@ -54,11 +54,11 @@ let getHeaderClass = (classes, tests) => {
  * return {array} [{data : 1}, {data : 2}]
  **/
 let JSONtoArray = json => {
-  let toReturn = [];
-  for (let i in json) {
-    toReturn.push(json[i]);
-  }
-  return toReturn;
+    let toReturn = [];
+    for (let i in json) {
+        toReturn.push(json[i]);
+    }
+    return toReturn;
 };
 
 export { swaggerToTestCardArray, JSONtoArray, getHeaderClass };

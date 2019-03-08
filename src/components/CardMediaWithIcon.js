@@ -14,44 +14,44 @@ import React from "react";
  **/
 
 let CardMediaWithIcon = (classes, status) => {
-  return (
-    <CardMedia className={classes.cardMedia} src={loadingGif}>
-      {status === "loading" && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <img
-            alt={status}
-            height="100px"
-            width="100px"
-            style={{ objectFit: "contain" }}
-            src={loadingGif}
-          />
-        </div>
-      )}
-      {status === "success" && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            className={classes.buttonSuccessMain}
-            size={"large"}
-            fullWidth={true}
-          >
-            <CheckIcon />
-          </Button>
-        </div>
-      )}
-      {status === "failure" && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            className={classes.buttonFailureMain}
-            size={"large"}
-            fullWidth={true}
-            disableRipple={true}
-          >
-            <WarningIcon />
-          </Button>
-        </div>
-      )}
-    </CardMedia>
-  );
+    return (
+        <CardMedia className={classes.cardMedia} src={loadingGif}>
+            {status === "loading" && (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                        alt={status}
+                        height="100px"
+                        width="100px"
+                        style={{ objectFit: "contain" }}
+                        src={loadingGif}
+                    />
+                </div>
+            )}
+            {status === "success" && (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                        className={classes.buttonSuccessMain}
+                        size={"large"}
+                        fullWidth={true}
+                    >
+                        <CheckIcon />
+                    </Button>
+                </div>
+            )}
+            {status === "failure" && (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                        className={classes.buttonFailureMain}
+                        size={"large"}
+                        fullWidth={true}
+                        disableRipple={true}
+                    >
+                        <WarningIcon />
+                    </Button>
+                </div>
+            )}
+        </CardMedia>
+    );
 };
 
 export default CardMediaWithIcon;

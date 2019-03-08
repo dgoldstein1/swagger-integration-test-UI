@@ -1,18 +1,213 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "example"
+    "title": "passwordservice.proto",
+    "version": "version not set"
   },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/example": {
-      "get": {
-        "operationId": "Example",
+    "/challenge": {
+      "post": {
+        "summary": "get challenge token",
+        "operationId": "GenerateChallenge",
         "responses": {
           "200": {
-            "description": ""
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protobufChallengeResponse"
+            }
           }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protobufChallengeRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Passwordservice"
+        ]
+      }
+    },
+    "/passwords": {
+      "get": {
+        "summary": "reads passwords",
+        "operationId": "ReadPasswords",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protobufCrudResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "newPasswords",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Passwordservice"
+        ]
+      },
+      "post": {
+        "summary": "update passwords",
+        "operationId": "UpdatePasswords",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protobufCrudResponse"
+            }
+          }
+        },
+        "tags": [
+          "Passwordservice"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAuthQuestion": {
+      "type": "object",
+      "properties": {
+        "q": {
+          "type": "string"
+        },
+        "a": {
+          "type": "string"
+        }
+      },
+      "title": "basic authentication questions for user"
+    },
+    "protobufChallengeRequestBody": {
+      "type": "object",
+      "properties": {
+        "userQuestionResponse": {
+          "$ref": "#/definitions/protobufAuthQuestion"
+        },
+        "location": {
+          "$ref": "#/definitions/protobufLocation"
         }
       }
+    },
+    "protobufChallengeResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "userQuestion": {
+          "type": "string"
+        },
+        "logins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufLogin"
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/protobufUser"
+        },
+        "challenge": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufCrudResponse": {
+      "type": "object",
+      "properties": {
+        "passwords": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufLocation": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "protobufLogin": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "location": {
+          "$ref": "#/definitions/protobufLocation"
+        }
+      },
+      "title": "login information fetched from IP stack"
+    },
+    "protobufUser": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "user information"
     }
   }
 }
