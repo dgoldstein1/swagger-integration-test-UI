@@ -47,6 +47,29 @@ let mockUser = {
     passwords: "ewogIC"
 };
 
+let lockedOutUser = {
+    user: {
+        first: "Locked",
+        last: "Out",
+        email: "locked@out.com"
+    },
+    auth: {
+        dn: "postchallengetestlockedout@integration-tests.com",
+        authpassword: "poiw83vliuaywelfiauwheflkajsdhdrvl938lwu3iohf",
+        accesstoken: "",
+        failedlogins: 10,
+        authquestions: [
+            {
+                q: "what is your pet's name?",
+                a: "penny"
+            }
+        ],
+        knownips: ["172.42.64.6"]
+    },
+    logins : [],
+    passwords : "sdfsdf",
+};
+
 let collection, client;
 describe("post/challenge", () => {
     beforeEach(done => {
@@ -61,7 +84,7 @@ describe("post/challenge", () => {
             const db = client.db("passwords");
             collection = db.collection("passwords");
             // insert mock data into mongo
-            collection.insertMany([mockUser], err => {
+            collection.insertMany([mockUser, lockedOutUser], err => {
                 if (err) console.error(err);
                 done();
             });
@@ -70,7 +93,7 @@ describe("post/challenge", () => {
 
     afterEach(done => {
         collection.deleteMany(
-            { "auth.dn": mockUser.auth.dn },
+            {},
             undefined,
             err => {
                 if (err) console.error(err);
@@ -80,12 +103,13 @@ describe("post/challenge", () => {
         );
     });
 
+    let endpoint =
+        testEndpoint.default +
+        postchallengePositiveTest.path +
+        "?user=" +
+        mockUser.auth.dn;
+
     test("retrieve new challenge", done => {
-        let endpoint =
-            testEndpoint.default +
-            postchallengePositiveTest.path +
-            "?user=" +
-            mockUser.auth.dn;
         let body = {
             location: {
                 ...mockUser.logins[0].location,
@@ -109,4 +133,85 @@ describe("post/challenge", () => {
             }
         });
     });
+    test("generates user defined challenge if location is not known", done => {
+        let newIp = "172.0.0.3";
+        // give new ip address
+        let body = {
+            location : {
+              ...mockUser.logins[0].location,
+              countryCode : mockUser.logins[0].location.countrycode,
+              ip : newIp,                
+            }
+        }
+
+        api.post(endpoint, body).then(({ error, success, data }) => {
+            try {
+                if (error) throw new Error(error.response.data.error);
+                expect(success).toBe(true);
+                expect(error).toBeFalsy();
+                if (postchallengePositiveTest.expectedOutput !== undefined) {
+                    expect(data).not.toBeUndefined()
+                    expect(data.error).toEqual('Login Unsuccessful')
+                    expect(data.userQuestion).toEqual(mockUser.auth.authquestions[0].q)
+                    
+                }
+                done();
+            } catch (e) {
+                done.fail(e);
+            }
+        });
+    })
+    test("retrieve new challenge if location is now know but know user-defined auth", done => {        
+        let newIp = "172.0.0.3";
+        // give new ip address, but this time with user defined answer
+        let body = {
+            "userQuestionResponse" : {
+                q : mockUser.auth.authquestions[0].q,
+                a : mockUser.auth.authquestions[0].a,
+            },
+            location : {
+              ...mockUser.logins[0].location,
+              countryCode : mockUser.logins[0].location.countrycode,
+              ip : newIp,                
+            }
+        }
+
+        api.post(endpoint, body).then(({ error, success, data }) => {
+            try {
+                if (error) throw new Error(error.response.data.error);
+                expect(success).toBe(true);
+                expect(error).toBeFalsy();
+                if (postchallengePositiveTest.expectedOutput !== undefined) {
+                    expect(data).not.toBeUndefined()
+                    expect(data.user).toEqual(mockUser.user)
+                    
+                }
+                done();
+            } catch (e) {
+                done.fail(e);
+            }
+        });
+        
+    })
+    test("gets locked out if more than 5 incorrect logins", done => {
+        let body = {
+            location : {
+              ...mockUser.logins[0].location,
+              countryCode : mockUser.logins[0].location.countrycode,
+              ip : "127.4.7.4",
+            }
+        }
+
+        let lockedOutUserEndpoint = 
+        testEndpoint.default +
+        postchallengePositiveTest.path +
+        "?user=" +
+        lockedOutUser.auth.dn
+        
+        // make request to test that we're locked out
+        api.post(lockedOutUserEndpoint, body).then(({error, success, data}) => {
+            expect(error.response.data.error).toEqual(`'${lockedOutUser.auth.dn}' is locked out. Please contact an administrator to regain access.`)
+            done()
+        })               
+    })
 });
